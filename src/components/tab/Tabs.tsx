@@ -21,47 +21,41 @@ import { useRouter } from 'next/navigation';
 import Toolbar from '@mui/material/Toolbar';
 import { useLoadingStore } from '@/stores/loadingStore';
 
-
 const a11yProps = (index: number) => {
   return {
-    id: `centered-tab-${ index }`,
-    'aria-controls': `centered-tabpanel-${ index }`,
+    id: `centered-tab-${index}`,
+    'aria-controls': `centered-tabpanel-${index}`,
   };
 };
 
 interface ChildProps {
-  label: string,
-  component: React.ReactNode[] | any
+  label: string;
+  component: React.ReactNode[] | any;
 }
 
 interface ComponentProps {
-  components: ChildProps[],
+  components: ChildProps[];
   [others: string]: any;
 }
 
 export default function CenteredTabs({ components }: ComponentProps) {
-
-  const router = useRouter()
+  const router = useRouter();
 
   const theme = useTheme();
   const [value, setValue] = useState<number>(0);
-  const { setFileSets, fileSets } = useFileUploadsStore(
-    state => ({
-      setFileSets: state.setFileSets,
-      fileSets: state.fileSets
-    })
-  )
+  const { setFileSets, fileSets } = useFileUploadsStore((state) => ({
+    setFileSets: state.setFileSets,
+    fileSets: state.fileSets,
+  }));
 
-  const setVennSets = useVennSetsStore(state => state.setVennSets)
+  const setVennSets = useVennSetsStore((state) => state.setVennSets);
   // const [vennSets, setVennSets] = useState<setsProps[]>(vennSetsDefault);
-
 
   const [manualSets, setManualSets] = useState<any[]>(ManualSetsDefault);
   const [error, setError] = useState<any>(errorDefault);
   const [vennImage, setVennImage] = useState<any>(null);
 
-  const setLoading = useLoadingStore(state => state.setLoading)
-
+  const setLoading = useLoadingStore((state) => state.setLoading);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -71,10 +65,11 @@ export default function CenteredTabs({ components }: ComponentProps) {
     setValue(index);
   };
 
-
-  const routeHandler = () => {
-    router.push('/venn-diagram/')
-  }
+  const routeHandler = async (exampleData: any) => {
+    // sent the example data state to the venn diagram page
+    router.push('/venn-diagram/?exampleData=' + exampleData);
+    // router.push('/venn-diagram/');
+  };
 
   const generateVenn = async (fileSets: FileSet[]) => {
     setLoading(true);
@@ -103,14 +98,23 @@ export default function CenteredTabs({ components }: ComponentProps) {
       return names;
     };
 
+    let exampleData = '';
+
     try {
       const parsedSets = await Promise.all(files.map(parseFile));
       const sets = await calculateSets(parsedSets, addNames());
       // Update the Venn diagram with the calculated sets
-      setVennSets(sets);
+
+      if (sets.length > 0) {
+        exampleData = '';
+        setVennSets(sets);
+      } else {
+        exampleData = 'true';
+        setVennSets(vennSetsDefault);
+      }
 
       // TODO make the route accept id to store the venn diagram
-      routeHandler();
+      await routeHandler(exampleData);
       setTimeout(() => {
         setLoading(false);
       }, 1000);
@@ -129,11 +133,8 @@ export default function CenteredTabs({ components }: ComponentProps) {
     setError(errorDefault);
   };
 
-
   return (
-    <StyledPaper
-      className='tabs-container'
-    >
+    <StyledPaper className='tabs-container'>
       <AppBar
         position='sticky'
         color='inherit'
@@ -161,7 +162,6 @@ export default function CenteredTabs({ components }: ComponentProps) {
         </Tabs>
       </AppBar>
 
-
       {components.map(({ component }: any, index: number) => (
         <TabPanel
           key={index}
@@ -172,7 +172,6 @@ export default function CenteredTabs({ components }: ComponentProps) {
           {component}
         </TabPanel>
       ))}
-
 
       <AppBar
         className='tab-app-navbar'

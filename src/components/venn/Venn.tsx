@@ -15,7 +15,6 @@ const Venn = () => {
   const [svgRef, setSvgRef] = useState<SVGSVGElement | null>(null);
 
   const downloadPNG = useDownloadPNG(svgRef);
-  console.log("🚀 ~ file: Venn.tsx:18 ~ Venn ~ svgRef:", svgRef)
   return (
     <Container>
       <VennChart
