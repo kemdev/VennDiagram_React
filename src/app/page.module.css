@@ -1,10 +1,12 @@
 .main {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  /* flex-direction: column; */
+  /* justify-content: space-between; */
   align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  /* padding: 6rem; */
+  /* height: 100vh;
+  min-height: 100vh; */
+  /* height: 100%; */
 }
 
 .description {
@@ -133,7 +135,7 @@
 
   .grid {
     grid-template-columns: 1fr;
-    margin-bottom: 120px;
+    /* margin-bottom: 120px; */
     max-width: 320px;
     text-align: center;
   }

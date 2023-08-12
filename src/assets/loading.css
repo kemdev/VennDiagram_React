@@ -1,0 +1,29 @@
+@keyframes mergeSeparate {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loading-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #2196f3;
+  animation: mergeSeparate 1s infinite;
+}
+
+.loading-circle:nth-child(2) {
+  animation-direction: reverse;
+  background-color: #f44336;
+}
