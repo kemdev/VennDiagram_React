@@ -1,6 +1,16 @@
+import ResponsiveAppBar from '@/components/Navbar'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import IconBreadcrumbs from '@/components/Breadcrumbs'
+import { Box } from '@mui/material'
+import Dashboard from '@/components/Dashboard'
+import styles from './page.module.css'
+import ResponsiveDrawer from '@/components/Drawer'
+import LoadingScreen from '@/components/Loading/Loading'
+import { useFileUploadsStore } from '@/stores/fileUploadsStore'
+import { useState } from 'react'
+import Container from '@/components/Container'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,9 +24,27 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+      <body className={inter.className}>
+        <IconBreadcrumbs />
+        {/* <main className={styles.main}> */}
+        {/* <Dashboard /> */}
+        {/* </main> */}
+        <ResponsiveDrawer
+          drawerChildren={
+            <Box>
+              <Dashboard />
+            </Box>
+          }
+        >
+          <Container >
+            {children}
+          </Container>
+        </ResponsiveDrawer>
+      </body>
+    </html >
   )
 }
