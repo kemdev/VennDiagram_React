@@ -1,6 +1,6 @@
 import { errorDefaultProps } from '@/types/messages';
 import { FileSet, ManualSet } from '@/types/setsTypes';
-import { setsPropsDefault } from '@/types/vennChart';
+import { setsProps } from '@/types/vennChart';
 
 const FileSetsDefault: FileSet[] = [
   { customName: '', fileName: '', file: null },
@@ -20,7 +20,7 @@ const ManualSetsDefault: ManualSet[] = [
   { name: '', data: '' },
 ];
 
-const vennSetsDefault: setsPropsDefault = [
+const vennSetsDefault: setsProps[] = [
   { sets: ['A'], size: 10 },
   { sets: ['B'], size: 10 },
   { sets: ['C'], size: 10 },
