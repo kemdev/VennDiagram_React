@@ -71,14 +71,22 @@ const WelcomeInfo = () => {
             </Collapse>
 
             {/* Add the hint about not open the csv file in the excel after saving it */}
-            <Paper>
+            <Paper
+              sx={{
+                width: 'fit-content',
+              }}
+            >
               <Alert severity='warning'>
                 Note: If you are using Excel, make sure you save your file as a
                 CSV file.
               </Alert>
             </Paper>
 
-            <Paper>
+            <Paper
+              sx={{
+                width: 'fit-content',
+              }}
+            >
               <Alert
                 severity='warning'
                 sx={{
