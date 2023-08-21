@@ -29,18 +29,10 @@ interface Props {
 }
 
 export default function ResponsiveDrawer(props: Props) {
-
-  const {
-    children,
-    drawerChildren,
-    currentPath
-  } = props;
+  const { children, drawerChildren, currentPath } = props;
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
-
-
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -52,7 +44,10 @@ export default function ResponsiveDrawer(props: Props) {
       <Divider />
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+          <ListItem
+            key={text}
+            disablePadding
+          >
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -65,7 +60,10 @@ export default function ResponsiveDrawer(props: Props) {
       <Divider />
       <List>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+          <ListItem
+            key={text}
+            disablePadding
+          >
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -78,51 +76,59 @@ export default function ResponsiveDrawer(props: Props) {
     </div>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box
       className='drawer-container'
-      sx={{ display: 'flex' }}>
+      sx={{ display: 'flex' }}
+    >
       <CssBaseline />
       <AppBar
         className='app-bar'
-        position="fixed"
+        position='fixed'
         sx={{
-          width: { sm: `calc(100% - ${ drawerWidth }px)` },
-          ml: { sm: `${ drawerWidth }px`, md: 0 },
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          ml: { sm: `${drawerWidth}px`, md: 0 },
           left: { md: drawerWidthWithCalc },
         }}
       >
-        <Toolbar
-        >
+        <Toolbar>
           {/* Here the very top bar. */}
 
           {/* Mobile View. */}
           <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
+            color='inherit'
+            aria-label='open drawer'
+            edge='start'
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography
+            variant='h6'
+            noWrap
+            component='div'
+          >
             {currentPath}
           </Typography>
         </Toolbar>
-        {<IconBreadcrumbs />}
+        {/* <IconBreadcrumbs /> */}
       </AppBar>
       <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth, md: drawerWidthWithCalc }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+        component='nav'
+        sx={{
+          width: { sm: drawerWidth, md: drawerWidthWithCalc },
+          flexShrink: { sm: 0 },
+        }}
+        aria-label='mailbox folders'
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
-          variant="temporary"
+          variant='temporary'
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
@@ -130,17 +136,23 @@ export default function ResponsiveDrawer(props: Props) {
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: { md: drawerWidthWithCalc, sm: drawerWidth } },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: { md: drawerWidthWithCalc, sm: drawerWidth },
+            },
           }}
         >
           {/* {drawer} */}
           {drawerChildren}
         </Drawer>
         <Drawer
-          variant="permanent"
+          variant='permanent'
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: { md: drawerWidthWithCalc, sm: drawerWidth } },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: { md: drawerWidthWithCalc, sm: drawerWidth },
+            },
           }}
           open
         >
@@ -148,9 +160,18 @@ export default function ResponsiveDrawer(props: Props) {
         </Drawer>
       </Box>
       <Box
-        component="main"
+        component='main'
         className='main-content'
-        sx={{ flexGrow: 1, p: 3, width: { md: drawerWidthWithCalc, sm: `calc(100% - ${ drawerWidthWithCalc }px)` }, height: '100%', overflow: 'auto' }}
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: {
+            md: drawerWidthWithCalc,
+            sm: `calc(100% - ${drawerWidthWithCalc}px)`,
+          },
+          height: '100%',
+          overflow: 'auto',
+        }}
       >
         <Toolbar />
         {children}

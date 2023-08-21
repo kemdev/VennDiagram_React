@@ -3,9 +3,6 @@ import { useCallback } from 'react';
 const useDownloadPNG = (svgRef: any) => {
   return useCallback(() => {
     if (!svgRef) return;
-
-    console.log("🚀 ~ file: useDownloadPNG.tsx:8 ~ returnuseCallback ~ svgRef:", svgRef)
-
     const svg = svgRef;
     const serializer = new XMLSerializer();
     const svgStr = serializer.serializeToString(svg);

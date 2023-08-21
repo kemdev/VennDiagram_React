@@ -8,7 +8,7 @@ import DataInformationProps from './vComponents/DataInformation';
 import { useVennSetsStore } from '@/stores/vennSetsStore';
 import Container from '../Container';
 import { Divider, Button } from '@mui/material';
-import useDownloadPNG from './vhooks/useDownloadPNG';
+import useDownloadPNG from './vHooks/useDownloadPNG';
 
 const Venn = () => {
   const vennSets = useVennSetsStore((state) => state.vennSets);
