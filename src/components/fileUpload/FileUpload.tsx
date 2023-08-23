@@ -29,6 +29,12 @@ const FileUpload = () => {
     setFileSets(newFileSets);
   };
 
+  const removeTimestampHandler = (index: number) => {
+    const newFileSets = [...fileSets];
+    newFileSets[index].fileName = newFileSets[index].fileName.split('?t')[0];
+    setFileSets(newFileSets);
+  };
+
   return (
     <Box>
       <Typography
@@ -66,9 +72,10 @@ const FileUpload = () => {
               <TextField
                 variant='outlined'
                 label={`Set ${index + 1} Name`}
-                value={fileSet.customName || fileSet.fileName || ''} // Read name directly from fileSet
+                value={
+                  fileSet.customName || fileSet.fileName.split('?time')[0] || ''
+                } // Read name directly from fileSet
                 onChange={(e) => {
-                  // Update the name in the corresponding fileSet
                   const newFileSets = [...fileSets];
                   newFileSets[index].customName = e.target.value;
                   setFileSets(newFileSets);

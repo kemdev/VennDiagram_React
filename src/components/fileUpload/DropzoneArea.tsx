@@ -48,7 +48,7 @@ const DropzoneArea: React.FC<DropzoneAreaProps> = ({
     }
 
     const file = acceptedFiles[0];
-    const fileName = file.name.split('.')[0] + Date.now();
+    const fileName = file.name.split('.')[0] + '?timestamp=' + Date.now();
 
     setFileSets((prevFileSets: FileSet[]) =>
       prevFileSets.map((fileSet: FileSet, index: number) =>

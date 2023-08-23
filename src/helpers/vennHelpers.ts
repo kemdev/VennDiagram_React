@@ -23,7 +23,7 @@ const calculateSets = async (parsedSets: VennProps[], names: string[]) => {
 
   // Calculate individual sets and create a map of intersections
   parsedSets.forEach((set, index) => {
-    const setName: string = names[index]; // Use the provided name
+    const setName: string = names[index].split('?time')[0]; // Use the provided name
     sets.push({ sets: [setName], size: set.length });
 
     set.forEach((element: string | number) => {
