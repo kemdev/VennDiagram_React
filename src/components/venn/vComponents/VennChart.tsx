@@ -10,7 +10,6 @@ interface VennChartProps {
   vennSets: setsProps[];
   setSvgRef?: React.Dispatch<React.SetStateAction<SVGSVGElement | null>>;
   size?: number | undefined;
-  updateDownloader?: boolean;
 }
 
 const VennChart: React.FC<VennChartProps> = ({ size, vennSets, setSvgRef }) => {

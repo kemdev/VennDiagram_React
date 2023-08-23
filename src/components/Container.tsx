@@ -6,6 +6,7 @@ import { useLoadingStore } from '@/stores/loadingStore';
 
 type Props = {
   children?: React.ReactNode;
+  [prop: string]: any; // for the rest property
 };
 
 export default function Container(props: Props) {
@@ -19,5 +20,12 @@ export default function Container(props: Props) {
   // }, [setLoading, loading]);
 
   // if (loading) return <Loading />;
-  return <StyledPaper className='container'>{children}</StyledPaper>;
+  return (
+    <StyledPaper
+      className='container'
+      {...props}
+    >
+      {children}
+    </StyledPaper>
+  );
 }
