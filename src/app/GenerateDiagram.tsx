@@ -11,7 +11,7 @@ const GenerateDiagram: React.FC = () => {
   return (
     <div>
       <h1>Generate Venn Diagram</h1>
-      <Venn />
+      {/* <Venn /> */}
       {/* Additional UI components if needed */}
     </div>
   );

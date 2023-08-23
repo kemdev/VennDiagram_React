@@ -10,22 +10,17 @@ import { FileSetsDefault } from '@/constants/setsDefaults';
 
 import { useFileUploadsStore } from '@/stores/fileUploadsStore';
 
-
-
 const FileUpload = () => {
   // const [fileSets, setFileSets] = useState<FileUploadProps>(FileSetsDefault);
 
   const { fileSets, dropzoneHeights } = useFileUploadsStore((state: any) => ({
     fileSets: state.fileSets,
-    dropzoneHeights: state.dropzoneHeights
+    dropzoneHeights: state.dropzoneHeights,
   }));
 
-  const setFileSets = useFileUploadsStore(state => state.setFileSets)
-
-
+  const setFileSets = useFileUploadsStore((state) => state.setFileSets);
 
   const dropzoneRefs = useRef(fileSets?.map(() => React.createRef()));
-
 
   const deleteFileHandler = (index: number) => {
     const newFileSets = [...fileSets];
@@ -35,12 +30,10 @@ const FileUpload = () => {
   };
 
   return (
-    <Box
-    >
+    <Box>
       <Typography
         variant='h4'
         gutterBottom
-
       >
         Upload Files
       </Typography>
@@ -69,12 +62,10 @@ const FileUpload = () => {
               alignItems: 'center',
             }}
           >
-            <Box
-              sx={{ marginRight: '20px', width: '50%', flexGrow: 1 }}
-            >
+            <Box sx={{ marginRight: '20px', width: '50%', flexGrow: 1 }}>
               <TextField
                 variant='outlined'
-                label={`Set ${ index + 1 } Name`}
+                label={`Set ${index + 1} Name`}
                 value={fileSet.customName || fileSet.fileName || ''} // Read name directly from fileSet
                 onChange={(e) => {
                   // Update the name in the corresponding fileSet
@@ -83,7 +74,7 @@ const FileUpload = () => {
                   setFileSets(newFileSets);
                 }}
                 sx={{
-                  width: '100%'
+                  width: '100%',
                 }}
               />
             </Box>
@@ -113,12 +104,12 @@ const FileUpload = () => {
                     borderLeft: '2px solid #ccc !important',
                     borderTopLeftRadius: '0px !important',
                     borderBottomLeftRadius: '0px !important',
-                    height: `${ dropzoneHeights[index] }px`,
+                    height: `${dropzoneHeights[index]}px`,
                     width: '20%',
                     fontSize: '0.8rem',
                     px: 1,
                     ...commonStyle,
-                    ...closeIconHoverStyle
+                    ...closeIconHoverStyle,
                   }}
                   onClick={(e) => deleteFileHandler(index)}
                 />

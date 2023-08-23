@@ -3,6 +3,7 @@ import Venn from '@/components/venn/Venn';
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { Alert, Paper } from '@mui/material';
+import { useVennSetsStore } from '@/stores/vennSetsStore';
 interface SearchParamsProps {
   exampleData: string;
 }
@@ -15,7 +16,6 @@ type Props = {
 
 export default function Result({ searchParams }: Props) {
   const { exampleData } = searchParams;
-  console.log('🚀 ~ file: page.tsx:18 ~ Result ~ searchParams:', searchParams);
 
   return (
     <Box>

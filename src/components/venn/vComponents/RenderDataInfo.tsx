@@ -2,18 +2,13 @@ import * as React from 'react';
 import { VennProps, setsProps } from '@/types/vennChart';
 import { Box, Typography } from '@mui/material';
 
-export interface IDataInformationProps {
+export interface IRenderDataInfo {
   vennSets: setsProps[];
   info?: VennProps;
 }
 
-export default function DataInformationProps(props: IDataInformationProps) {
+export default function RenderDataInfo(props: IRenderDataInfo) {
   const { vennSets, info } = props;
-
-  console.log(
-    '🚀 ~ file: DataInformation.tsx:14 ~ DataInformationProps ~ vennSets:',
-    vennSets
-  );
 
   return (
     <Box>

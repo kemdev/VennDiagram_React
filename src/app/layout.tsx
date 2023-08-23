@@ -1,3 +1,4 @@
+// 'use client';
 import ResponsiveAppBar from '@/components/Navbar';
 import './globals.css';
 import type { Metadata } from 'next';
@@ -5,9 +6,10 @@ import { Inter } from 'next/font/google';
 import IconBreadcrumbs from '@/components/Breadcrumbs';
 import { Box } from '@mui/material';
 import Dashboard from '@/components/Dashboard';
-import styles from './page.module.css';
 import ResponsiveDrawer from '@/components/Drawer';
 import Container from '@/components/Container';
+import { useLoadingStore } from '@/stores/loadingStore';
+import Loading from '@/components/Loading/Loading';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,6 +23,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // const setLoading = useLoadingStore((state) => state.setLoading);
+  // const loading = useLoadingStore((state) => state.loading);
+
+  // if (loading) return <Loading />;
+
   return (
     <html lang='en'>
       <body className={inter.className}>

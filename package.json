@@ -32,5 +32,8 @@
     "typescript": "5.1.6",
     "venn.js": "^0.2.20",
     "zustand": "^4.4.1"
+  },
+  "devDependencies": {
+    "@types/color": "^3.0.3"
   }
 }

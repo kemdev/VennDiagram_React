@@ -1,6 +1,7 @@
 interface setsProps {
   sets: string[];
   size: number;
+  label?: string | number | null;
 }
 
 

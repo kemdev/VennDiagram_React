@@ -2,12 +2,12 @@ import * as venn from 'venn.js'; // The error because there is no typescript ver
 import * as d3 from 'd3';
 import { VennProps, setsProps } from '@/types/vennChart';
 import randomColor from '@/helpers/randomColor';
-import { RefObject } from 'react';
 
 interface IChartRenderProps {
   vennSets: setsProps[];
   vennSize: number | undefined;
   container: any;
+  setLoading: (loading: boolean) => void;
 }
 
 const colorGenerator = (vennSets: setsProps[]) => {
@@ -18,6 +18,7 @@ const chart = ({
   container,
   vennSets,
   vennSize,
+  setLoading, // NOTE this is a function that sets the loading state
 }: IChartRenderProps): SVGSVGElement | null => {
   const chart = venn.VennDiagram().width(vennSize).height(vennSize);
   const div = d3.select(container);
@@ -26,6 +27,20 @@ const chart = ({
   div?.datum(vennSets)?.call(chart as any);
   const svg = div.select('svg');
 
+  // add the text
+
+  // div
+  //   .append('text')
+  //   .attr('x', (vennSize || 500) / 2)
+  //   .attr('y', 50)
+  //   .attr('text-anchor', 'middle')
+  //   .style('font-size', '1.2rem')
+  //   .style('fill', '#000')
+  //   .style('font-weight', 'bold')
+  //   .style('font-family', 'sans-serif')
+  //   .text('Venn Diagram');
+
+  setLoading(false);
   return svg.node() as SVGSVGElement;
 };
 
@@ -33,10 +48,11 @@ function renderChart({
   container,
   vennSets,
   vennSize,
+  setLoading,
 }: IChartRenderProps): SVGSVGElement | null {
   const colors = colorGenerator(vennSets);
 
-  return chart({ container, vennSets, vennSize });
+  return chart({ container, vennSets, vennSize, setLoading });
   // // Apply Circle Styles
   // d3.selectAll('.venn-circle path')
   //   .style('fill-opacity', 0)

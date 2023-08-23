@@ -20,6 +20,7 @@ import { useVennSetsStore } from '@/stores/vennSetsStore';
 import { useRouter } from 'next/navigation';
 import Toolbar from '@mui/material/Toolbar';
 import { useLoadingStore } from '@/stores/loadingStore';
+import CustomButton from '@/common/Buttons/cButton';
 
 const a11yProps = (index: number) => {
   return {
@@ -73,6 +74,7 @@ export default function CenteredTabs({ components }: ComponentProps) {
 
   const generateVenn = async (fileSets: FileSet[]) => {
     setLoading(true);
+
     const { files, fileNames, customNames } = fileSets.reduce(
       (acc: any, fileSet: FileSet) => {
         if (fileSet.file) {
@@ -177,31 +179,28 @@ export default function CenteredTabs({ components }: ComponentProps) {
         className='tab-app-navbar'
         position='sticky'
         color='inherit'
-        // bottom={0}
         sx={{
           marginTop: '20px',
           bottom: 0,
         }}
       >
         <Toolbar>
-          <Button
-            variant='contained'
+          <CustomButton
             color='error'
             sx={{ marginRight: 'auto' }}
             onClick={resetEverything}
+            func={resetEverything}
           >
             Reset
-          </Button>
+          </CustomButton>
 
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={(e) => {
+          <CustomButton
+            func={() => {
               generateVenn(fileSets);
             }}
           >
             Generate Venn Diagram
-          </Button>
+          </CustomButton>
         </Toolbar>
       </AppBar>
     </StyledPaper>

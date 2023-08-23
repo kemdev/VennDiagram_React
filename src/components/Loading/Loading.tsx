@@ -1,8 +1,9 @@
+'use client';
+import React from 'react';
 import '@/assets/loading.css';
-import Container from '../Container';
 import StyledPaper from '../StyledPaper';
 
-const LoadingScreen = () => (
+const Loading: React.FC = () => (
   <StyledPaper className='container'>
     <div className='loading-container'>
       <div className='loading-circle'></div>
@@ -11,4 +12,4 @@ const LoadingScreen = () => (
   </StyledPaper>
 );
 
-export default LoadingScreen;
+export default Loading;

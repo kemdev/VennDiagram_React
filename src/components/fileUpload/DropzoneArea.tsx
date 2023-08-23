@@ -3,14 +3,19 @@ import { Typography } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
 
 // import constantsStyles from asset file
-import { focusedStyle, acceptStyle, rejectStyle, baseStyle } from '@/assets/constantStyles';
+import {
+  focusedStyle,
+  acceptStyle,
+  rejectStyle,
+  baseStyle,
+} from '@/assets/constantStyles';
 import { useFileUploadsStore } from '@/stores/fileUploadsStore';
 import { FileSet } from '@/types/setsTypes';
 
 interface DropzoneAreaProps {
   file: File | null;
   fileIndex: number;
-  [key: string]: any
+  [key: string]: any;
 }
 
 interface StyleProps {
@@ -20,7 +25,6 @@ interface StyleProps {
   any: any;
 }
 
-
 const DropzoneArea: React.FC<DropzoneAreaProps> = ({
   // onDrop,
   fileIndex,
@@ -28,23 +32,32 @@ const DropzoneArea: React.FC<DropzoneAreaProps> = ({
   ...props
 }) => {
   const ref = useRef<HTMLInputElement>(null);
-  const setFileSets = useFileUploadsStore(state => state.setFileSets)
-  const setDropzoneHeights = useFileUploadsStore(state => state.setDropzoneHeights);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const setFileSets = useFileUploadsStore((state) => state.setFileSets);
+  const setDropzoneHeights = useFileUploadsStore(
+    (state) => state.setDropzoneHeights
+  );
 
   const onDrop = (acceptedFiles: File[], fileIndex: number) => {
+    if (ref.current) {
+      ref.current.value = '';
+    }
+    if (fileInputRef.current) {
+      (fileInputRef.current as any).value = '';
+    }
+
     const file = acceptedFiles[0];
-    const fileName = file.name.split('.')[0];
-
-
+    const fileName = file.name.split('.')[0] + Date.now();
 
     setFileSets((prevFileSets: FileSet[]) =>
       prevFileSets.map((fileSet: FileSet, index: number) =>
         index === fileIndex
           ? {
-            ...fileSet,
-            file,
-            fileName,
-          }
+              ...fileSet,
+              file,
+              fileName,
+            }
           : fileSet
       )
     );
@@ -64,7 +77,7 @@ const DropzoneArea: React.FC<DropzoneAreaProps> = ({
       ...(isFocused ? focusedStyle : {}),
       ...(isDragAccept ? acceptStyle : {}),
       ...(isDragReject ? rejectStyle : {}),
-      ...props.style
+      ...props.style,
     }),
     [isFocused, isDragAccept, isDragReject, props.style]
   );
@@ -80,9 +93,11 @@ const DropzoneArea: React.FC<DropzoneAreaProps> = ({
       {...getRootProps({ style })}
       ref={ref}
       className='dropzone'
-
     >
-      <input {...getInputProps()} />
+      <input
+        {...getInputProps()}
+        ref={fileInputRef}
+      />
       <Typography
         variant='body2'
         color='textSecondary'
